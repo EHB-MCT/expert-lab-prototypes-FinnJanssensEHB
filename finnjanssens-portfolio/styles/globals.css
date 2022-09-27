@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url("https://use.typekit.net/hwd7pjm.css");
+
+:root {
+  font-family: neue-haas-grotesk-text, sans-serif;
+}
+
+h1 {
+  font-family: neue-haas-grotesk-display, sans-serif;
+}
+
+body {
+  background-color: #f8f8f8;
+}
