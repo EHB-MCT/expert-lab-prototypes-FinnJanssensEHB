@@ -8,7 +8,7 @@ export default function Projects({ projects }) {
 
   return (
     <Layout>
-      <h1 className="font-bold text-5xl">My Projects</h1>
+      <h1 className="font-bold text-5xl mb-8">My Projects</h1>
       {projects &&
         projects.data.map((project) => {
           return <Project key={project.id} project={project} />;
@@ -19,7 +19,7 @@ export default function Projects({ projects }) {
 
 export async function getServerSideProps() {
   const projectsResponse = await fetcher(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/projects`
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/projects?populate=*`
   );
   return {
     props: {
