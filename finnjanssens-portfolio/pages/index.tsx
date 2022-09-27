@@ -7,7 +7,7 @@ import Layout from "../components/Layout";
 export default function Home() {
   return (
     <Layout>
-      <h1 className="font-bold text-5xl">Finn Janssens</h1>
+      <h1 className="font-bold text-5xl">Howdy! I'm Finn</h1>
     </Layout>
   );
 }
