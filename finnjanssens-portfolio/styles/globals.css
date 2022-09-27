@@ -8,7 +8,9 @@
   font-family: neue-haas-grotesk-text, sans-serif;
 }
 
-h1 {
+h1,
+h2,
+h3 {
   font-family: neue-haas-grotesk-display, sans-serif;
 }
 

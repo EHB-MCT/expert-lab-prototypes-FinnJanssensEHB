@@ -4,7 +4,7 @@ import Nav from "./Nav";
 
 export default function Layout({ children }) {
   return (
-    <>
+    <div>
       <Head>
         <title>Finn Janssens | Portfolio</title>
       </Head>
@@ -14,6 +14,6 @@ export default function Layout({ children }) {
           <div className="text-2xl font-medium">{children}</div>
         </div>
       </main>
-    </>
+    </div>
   );
 }
