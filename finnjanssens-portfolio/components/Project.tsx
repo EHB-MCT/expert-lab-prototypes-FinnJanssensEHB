@@ -10,9 +10,10 @@ export default function Project({ project }) {
   const videoExtensions = [".mov", ".mp4"];
   return (
     <div className="bg-black p-8 rounded-lg text-white w-full mb-10">
-      <h1 className="font-semibold mb-4 text-2xl">
-        {project.attributes.Title}
-      </h1>
+      <h1 className="font-semibold text-2xl">{project.attributes.Title}</h1>
+      <h2 className="font-light mb-4 text-sm">
+        {project.attributes.FinishedDate || ""}
+      </h2>
       <p className="mb-4">{project.attributes.Description}</p>
       <Carousel dynamicHeight>
         {media.map((item) => {
