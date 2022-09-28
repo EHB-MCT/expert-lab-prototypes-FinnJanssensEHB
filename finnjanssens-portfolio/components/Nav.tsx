@@ -6,7 +6,7 @@ export default function Nav() {
     <>
       <nav className="border-gray-200 px-2 sm:px-4 py-2.5">
         <div className="container flex flex-wrap justify-between items-center mx-auto">
-          <span className="self-center text-xl font-bold whitespace-nowrap">
+          <span className="self-center text-xl font-bold whitespace-nowrap border-b-4 border-yellow-500">
             Finn
           </span>
           <div className="hidden w-full md:block md:w-auto" id="navbar-default">

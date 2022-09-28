@@ -4,7 +4,7 @@
   "info": {
     "singularName": "contact-info",
     "pluralName": "contact-infos",
-    "displayName": "ContactInfo",
+    "displayName": "Contact",
     "description": ""
   },
   "options": {
@@ -27,10 +27,13 @@
       "regex": "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)",
       "required": true
     },
-    "BehanceUrl": {
+    "InstagramHandle": {
       "type": "string",
-      "required": true,
-      "regex": "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)"
+      "required": true
+    },
+    "LinkedinName": {
+      "type": "string",
+      "required": true
     }
   }
 }
