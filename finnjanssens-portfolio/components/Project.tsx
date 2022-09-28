@@ -9,12 +9,12 @@ export default function Project({ project }) {
   const pictureExtensions = [".png", ".jpg", ".jpeg"];
   const videoExtensions = [".mov", ".mp4"];
   return (
-    <div className="mb-8">
+    <div className="bg-black p-8 rounded-lg text-white w-full mb-10">
       <h1 className="font-semibold mb-4 text-2xl">
         {project.attributes.Title}
       </h1>
       <p className="mb-4">{project.attributes.Description}</p>
-      <Carousel autoPlay dynamicHeight>
+      <Carousel dynamicHeight>
         {media.map((item) => {
           console.log("http://localhost:1337" + item.attributes.url);
 
@@ -29,8 +29,8 @@ export default function Project({ project }) {
             return (
               <video
                 controls
-                autoPlay
                 src={"http://localhost:1337" + item.attributes.url}
+                height="auto"
               ></video>
             );
           } else {
