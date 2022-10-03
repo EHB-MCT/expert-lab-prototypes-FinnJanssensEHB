@@ -4,13 +4,6 @@ require("dotenv").config();
 
 const client = new Client({});
 
-// const args = {
-//   params: {
-//     key: "AIzaSyDLEXwI0TVQdP4HNGan2JKBhWcXSyN-vus",
-//     address: "Perth 4WD & Commercial Centre",
-//   },
-// };
-
 const args = {
   params: {
     key: process.env.MAPS_API_KEY,
