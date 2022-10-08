@@ -1,9 +1,13 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
 
+const DataSize = 500;
+
 const fetchTitles = async () => {
   try {
-    const response = await axios.get("https://www.torfs.be/nl/heren/schoenen/");
+    const response = await axios.get(
+      `https://www.torfs.be/nl/heren/schoenen/?cgid=Heren-Schoenen&start=0&sz=${DataSize}`
+    );
 
     const html = response.data;
 
@@ -12,15 +16,22 @@ const fetchTitles = async () => {
     const data = [];
 
     $("div.product").each((_idx, el) => {
-      const brand = $(
+      let brand = $(
         "div.product-tile__content > span > div:first-child > a",
         el
       ).text();
-      const type = $(
+      brand = brand.substring(1, brand.length - 1);
+
+      let type = $(
         "div.product-tile__content > span > div:nth-child(2) > a",
         el
       ).text();
-      data.push({ brand, type });
+      type = type.substring(1, type.length - 1);
+
+      let price = $("div.product-tile__price span.value", el).text();
+      price = price.substring(1, price.length - 1);
+
+      data.push({ brand, type, price });
     });
 
     return data;
@@ -29,4 +40,4 @@ const fetchTitles = async () => {
   }
 };
 
-fetchTitles().then((data) => console.log(data));
+fetchTitles().then((data) => console.log(data, data.length + " items"));
