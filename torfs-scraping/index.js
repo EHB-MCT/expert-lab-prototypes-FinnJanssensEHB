@@ -31,7 +31,13 @@ const fetchTitles = async () => {
       let price = $("div.product-tile__price span.value", el).text();
       price = price.substring(1, price.length - 1);
 
-      data.push({ brand, type, price });
+      let imageURL = $(
+        "div.product-tile__image picture img.tile-image",
+        el
+      ).attr("data-src");
+      // imageURL = imageURL.substring(1, imageURL.length - 1);
+
+      data.push({ brand, type, price, imageURL });
     });
 
     return data;
