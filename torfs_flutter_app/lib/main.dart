@@ -17,7 +17,7 @@ class Data {
   final String brand;
   final String type;
   final String price;
-  String imageUrl = "";
+  final String imageUrl;
 
   Data(
       {required this.brand,
@@ -76,30 +76,28 @@ class _MyAppState extends State<MyApp> {
                           child: Padding(
                               padding: const EdgeInsets.all(16),
                               child: Container(
-                                  width: double.infinity,
-                                  height: 200,
-                                  decoration: const BoxDecoration(
-                                      image: DecorationImage(
-                                          image: NetworkImage(
-                                              "https://picsum.photos/600"),
-                                          fit: BoxFit.cover)),
-                                  child: Container(
-                                      alignment: Alignment.bottomRight,
-                                      padding: const EdgeInsets.all(12),
-                                      child: Column(
-                                        children: [
-                                          Text(data[index].brand,
-                                              style: const TextStyle(
-                                                  fontSize: 30,
-                                                  fontWeight: FontWeight.w900,
-                                                  color: Colors.black)),
-                                          Text(data[index].type,
-                                              style: const TextStyle(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Colors.black)),
-                                        ],
-                                      )))));
+                                  alignment: Alignment.bottomRight,
+                                  padding: const EdgeInsets.all(12),
+                                  child: Column(
+                                    children: [
+                                      Image.network(data[index].imageUrl),
+                                      Text(data[index].brand,
+                                          style: const TextStyle(
+                                              fontSize: 30,
+                                              fontWeight: FontWeight.w900,
+                                              color: Colors.black)),
+                                      Text(data[index].type,
+                                          style: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.black)),
+                                      Text(data[index].price,
+                                          style: const TextStyle(
+                                              fontSize: 25,
+                                              fontWeight: FontWeight.w200,
+                                              color: Colors.black)),
+                                    ],
+                                  ))));
                     });
               } else if (snapshot.hasError) {
                 return Text("${snapshot.error}");
