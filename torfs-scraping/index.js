@@ -1,7 +1,19 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
+const express = require("express");
 
-const DataSize = 500;
+const app = express();
+
+const port = 3000;
+const DataSize = 10;
+
+app.get("/schoenen", (req, res) => {
+  fetchTitles().then((data) => res.json(data));
+});
+
+app.listen(port, () => {
+  console.log(`Torfs API listening on port ${port}`);
+});
 
 const fetchTitles = async () => {
   try {
@@ -31,10 +43,11 @@ const fetchTitles = async () => {
       let price = $("div.product-tile__price span.value", el).text();
       price = price.substring(1, price.length - 1);
 
-      let imageURL = $(
-        "div.product-tile__image picture img.tile-image",
-        el
-      ).attr("data-src");
+      let imageURL =
+        $("div.product-tile__image picture img.tile-image", el).attr(
+          "data-src"
+        ) ||
+        $("div.product-tile__image picture img.tile-image", el).attr("src");
       // imageURL = imageURL.substring(1, imageURL.length - 1);
 
       data.push({ brand, type, price, imageURL });
@@ -45,5 +58,3 @@ const fetchTitles = async () => {
     throw error;
   }
 };
-
-fetchTitles().then((data) => console.log(data, data.length + " items"));
