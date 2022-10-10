@@ -48,7 +48,7 @@ const fetchTitles = async () => {
           "data-src"
         ) ||
         $("div.product-tile__image picture img.tile-image", el).attr("src");
-      // imageURL = imageURL.substring(1, imageURL.length - 1);
+      imageURL = imageURL.substring(0, imageURL.length - 7);
 
       data.push({ brand, type, price, imageURL });
     });
