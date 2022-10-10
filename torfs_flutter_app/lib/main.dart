@@ -17,7 +17,7 @@ class Data {
   final String brand;
   final String type;
   final String price;
-  final String imageUrl;
+  String imageUrl = "";
 
   Data(
       {required this.brand,
@@ -35,15 +35,13 @@ class Data {
   }
 }
 
-void main() => runApp(MyApp(
-      key: Key("app_key"),
-    ));
+void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
-  MyApp({required Key key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
@@ -61,7 +59,7 @@ class _MyAppState extends State<MyApp> {
       title: 'Flutter API and ListView Example',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Flutter ListView'),
+          title: const Text('Flutter ListView'),
         ),
         body: Center(
           child: FutureBuilder<List<Data>>(
@@ -72,19 +70,42 @@ class _MyAppState extends State<MyApp> {
                 return ListView.builder(
                     itemCount: data.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        height: 75,
-                        color: Colors.white,
-                        child: Center(
-                          child: Text(data[index].brand),
-                        ),
-                      );
+                      return Card(
+                          elevation: 6,
+                          margin: const EdgeInsets.all(12),
+                          child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Container(
+                                  width: double.infinity,
+                                  height: 200,
+                                  decoration: const BoxDecoration(
+                                      image: DecorationImage(
+                                          image: NetworkImage(
+                                              "https://picsum.photos/600"),
+                                          fit: BoxFit.cover)),
+                                  child: Container(
+                                      alignment: Alignment.bottomRight,
+                                      padding: const EdgeInsets.all(12),
+                                      child: Column(
+                                        children: [
+                                          Text(data[index].brand,
+                                              style: const TextStyle(
+                                                  fontSize: 30,
+                                                  fontWeight: FontWeight.w900,
+                                                  color: Colors.black)),
+                                          Text(data[index].type,
+                                              style: const TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.black)),
+                                        ],
+                                      )))));
                     });
               } else if (snapshot.hasError) {
                 return Text("${snapshot.error}");
               }
               // By default show a loading spinner.
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             },
           ),
         ),
