@@ -59,7 +59,7 @@ class _MyAppState extends State<MyApp> {
       title: 'Flutter API and ListView Example',
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Flutter ListView'),
+          title: const Text('Torfs'),
         ),
         body: Center(
           child: FutureBuilder<List<Data>>(

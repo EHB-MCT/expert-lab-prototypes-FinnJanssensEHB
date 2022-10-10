@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 
 const port = 3000;
-const DataSize = 10;
+const DataSize = 100;
 
 app.get("/schoenen", (req, res) => {
   fetchTitles().then((data) => res.json(data));
