@@ -1,7 +1,9 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require("cors");
 const app = express();
-const port = 3000;
+const port = 7000;
+app.use(cors());
 
 const { MongoClient } = require("mongodb");
 
@@ -19,15 +21,23 @@ async function findOccurences(skip, limit) {
   const query = {};
   const cursor = collection.find(query).limit(limit).skip(skip);
   const results = await cursor.toArray();
+  const count = await collection.countDocuments();
   console.log("results 1", results);
-  return results;
+  return { count, results };
 }
 
 app.get("/occurences", async (req, res) => {
   const page = parseInt(req.query.page) || 0;
   const pageSize = parseInt(req.query.pageSize) || 10;
   await findOccurences(page, pageSize)
-    .then((data) => res.json({ page: page, pageSize: pageSize, results: data }))
+    .then((data) =>
+      res.json({
+        page: page,
+        pageSize: pageSize,
+        count: data.count,
+        results: data.results,
+      })
+    )
     .catch(console.error)
     .finally(() => client.close());
 });
