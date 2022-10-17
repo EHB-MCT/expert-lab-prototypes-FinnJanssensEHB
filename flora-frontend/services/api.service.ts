@@ -6,6 +6,8 @@ export async function fetcher(url: string, options: any = {}) {
     response = await fetch(url, options);
   }
 
+  console.log("API response: ", response);
+
   const data = await response.json();
   return data;
 }
