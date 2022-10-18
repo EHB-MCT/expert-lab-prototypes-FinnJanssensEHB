@@ -12,7 +12,7 @@ const client = new MongoClient(url);
 
 const dbName = process.env.MONGODB_DATABASE;
 
-async function findOccurences(skip, limit, q = "") {
+async function findOccurences(skip, limit, q, sort_by, order_by) {
   await client.connect();
   console.log("Connected successfully to server");
   const db = client.db(dbName);
@@ -28,7 +28,15 @@ async function findOccurences(skip, limit, q = "") {
   //   },
   // ];
 
-  const sort = { eventDate: -1 };
+  let order_by_mdb = -1;
+  if (order_by == "desc") {
+    order_by_mdb = -1;
+  } else if (order_by == "asc") {
+    order_by_mdb = 1;
+  }
+
+  const sort = JSON.parse(`{ "${sort_by}": ${order_by_mdb} }`);
+  console.log(sort);
   const cursor = collection
     .find({})
     // .aggregate(search)
@@ -45,7 +53,9 @@ app.get("/occurences", async (req, res) => {
   const page = parseInt(req.query.page) || 0;
   const pageSize = parseInt(req.query.pageSize) || 10;
   const query = req.query.q || "";
-  await findOccurences(page, pageSize, query)
+  const sort_by = req.query.sort_by || "eventDate";
+  const order_by = req.query.order_by || "desc";
+  await findOccurences(page, pageSize, query, sort_by, order_by)
     .then((data) =>
       res.json({
         page: page,
