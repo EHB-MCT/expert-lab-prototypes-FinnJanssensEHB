@@ -12,24 +12,40 @@ const client = new MongoClient(url);
 
 const dbName = process.env.MONGODB_DATABASE;
 
-async function findOccurences(skip, limit) {
+async function findOccurences(skip, limit, q = "") {
   await client.connect();
   console.log("Connected successfully to server");
   const db = client.db(dbName);
   const collection = db.collection(process.env.MONGODB_COLLECTION);
+  // const search = [
+  //   {
+  //     $search: {
+  //       autocomplete: {
+  //         path: "family",
+  //         query: q,
+  //       },
+  //     },
+  //   },
+  // ];
 
-  const query = {};
-  const cursor = collection.find(query).limit(limit).skip(skip);
+  const sort = { eventDate: -1 };
+  const cursor = collection
+    .find({})
+    // .aggregate(search)
+    .sort(sort)
+    .limit(limit)
+    .skip(skip);
   const results = await cursor.toArray();
   const count = await collection.countDocuments();
-  console.log("results 1", results);
+  // console.log("results 1", results);
   return { count, results };
 }
 
 app.get("/occurences", async (req, res) => {
   const page = parseInt(req.query.page) || 0;
   const pageSize = parseInt(req.query.pageSize) || 10;
-  await findOccurences(page, pageSize)
+  const query = req.query.q || "";
+  await findOccurences(page, pageSize, query)
     .then((data) =>
       res.json({
         page: page,
