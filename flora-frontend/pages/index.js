@@ -2,49 +2,69 @@ import Layout from "../components/Layout";
 import Occurence from "../components/Occurence";
 import { fetcher } from "../services/api.service";
 import { useState, useEffect, React } from "react";
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
 
-export default function Home() {
-  const [Page, setPage] = useState(1);
-  const [PageSize, setPageSize] = useState(25);
-  const [data, setData] = useState({ page: 0, pageSize: 0, results: [] });
+export default function Home({ initialCache }) {
+  const [dataCache, setDataCache] = useState(initialCache);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(25);
 
-  useEffect(() => {
-    fetchFromApi();
-  }, [Page]);
-
-  function handlePreviousPage() {
-    Page > 1 ? setPage(Page - PageSize) : () => {};
+  function handlePreviousPage() {}
+  async function handleNextPage() {
+    console.log("page + pageSize", page + pageSize);
+    let newPage = page + pageSize;
+    setPage(newPage);
+    console.log("page", page);
+    if (dataCache.length < page + pageSize + 1) {
+      updateCache();
+    }
   }
-  function handleNextPage() {
-    Page < data.count ? setPage(Page + PageSize) : () => {};
-  }
 
-  async function fetchFromApi() {
+  async function updateCache() {
     const response = await fetcher(
-      `http://localhost:7000/occurences?page=${Page}&pageSize=${PageSize}`
+      `http://localhost:7000/occurences?page=${page}&pageSize=${pageSize}`
     );
-    setData(response);
+    console.log(response.results);
+    setDataCache(dataCache.concat(response.results));
+    console.log(dataCache);
   }
+
+  const sortOptions = ["eventDate", "recordedBy", "family"];
 
   return (
     <Layout>
-      {data &&
-        data.results.map((occurence) => {
+      <div className=" flex flex-row w-1/4 mb-4 m-auto">
+        <Dropdown
+          className="m-auto mb-4"
+          options={sortOptions}
+          value={sortOptions[0]}
+          placeholder="Select an option"
+        />
+        <Dropdown
+          className="m-auto mb-4"
+          options={["desc", "asc"]}
+          value={"desc"}
+          placeholder="Select an option"
+        />
+      </div>
+      {dataCache &&
+        dataCache.slice(page, pageSize).map((occurence) => {
           return <Occurence key={occurence.gbifID} occurence={occurence} />;
         })}
       <h3 className="text-sm mt-4">
-        Showing {data.page}-{data.page + data.pageSize} of {data.count}
+        {/* Showing {data.page}-{data.page + data.pageSize} of {data.count} */}
       </h3>
-      <div className="flex-row">
+      <div className="flex flex-row">
         <button
           onClick={handlePreviousPage}
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
         >
           &lt;
         </button>
         <button
           onClick={handleNextPage}
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
         >
           &gt;
         </button>
@@ -53,16 +73,13 @@ export default function Home() {
   );
 }
 
-// export async function getServerSideProps(page = 1, pageSize = 25) {
-//   const response = await fetcher(
-//     `http://localhost:7000/occurences?page=${page}&pageSize=${pageSize}`
-//   );
-//   return {
-//     props: {
-//       page: response.page,
-//       pageSize: response.pageSize,
-//       count: response.count,
-//       occurences: response.results,
-//     },
-//   };
-// }
+export async function getServerSideProps() {
+  const response = await fetcher(
+    `http://localhost:7000/occurences?page=1&pageSize=50`
+  );
+  return {
+    props: {
+      initialCache: response.results,
+    },
+  };
+}
