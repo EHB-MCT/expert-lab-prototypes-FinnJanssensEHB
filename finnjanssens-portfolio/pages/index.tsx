@@ -10,30 +10,11 @@ import { CheckSquare, Square } from "react-feather";
 export default function Home() {
   return (
     <Layout>
-      <h1 className="font-bold text-5xl mb-8">Hello! I'm Finn. I'm a..</h1>
-      <div className="flex row-auto items-center mb-4">
-        <CheckSquare />
-        <h2 className="font-medium text-2xl ml-4"> Bachelor Electronics-IT</h2>
-      </div>
-      <div className="flex row-auto items-center mb-4">
-        <CheckSquare />
-        <h2 className="font-medium text-2xl ml-4">
-          Bachelor Multimedia & Creative Technology
-        </h2>
-      </div>
-      <div className="flex row-auto items-center mb-4">
-        <CheckSquare />
-        <h2 className="font-medium text-2xl ml-4">Analog Photographer</h2>
-      </div>
-      <div className="flex row-auto items-center mb-4">
-        <Square />
-        <h2 className="font-medium text-2xl ml-4">...</h2>
-      </div>
-      <Image
-        className="absolute bottom-0 left-0 w-1/2"
-        src={finn1}
-        alt="a picture of me"
-      />
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae sapiente
+        magni laboriosam possimus cupiditate iste. Neque quisquam numquam, est
+        quasi maxime quidem iste officiis quo iure iusto id! Officia, labore.
+      </p>
     </Layout>
   );
 }
