@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import { Router, useRouter } from "next/router";
 
 export default function Nav() {
   const [navItems, setNavItems] = useState([
@@ -9,39 +10,35 @@ export default function Nav() {
     "Contact",
   ]);
 
-  function handleNav(index: number) {
-    let a = navItems.slice(index);
-    let b = navItems.slice(0, index);
-    console.log(a.concat(b));
-    setNavItems(a.concat(b));
-  }
+  const router = useRouter();
+  console.log(router);
+
+  //"border-l-2 border-black pl-2 mb-4 cursor-pointer"
+
   return (
     <>
       <nav className="col-span-4 mt-4">
         <div className="grid grid-cols-4 gap-x-5">
           {navItems.map((item, index) => {
-            let style = "";
-            index == 0
-              ? (style = "border-l-2 border-black pl-2 mb-4 active")
-              : (style = "border-l-2 border-black pl-2 mb-4");
             return (
-              <h3
+              <Link
+                href={`/${item == "Home" ? "" : item.toLowerCase()}`}
                 key={index}
-                className={style}
-                onClick={() => {
-                  handleNav(index);
-                }}
               >
-                {item}
-              </h3>
+                <h3 className={activeNavLink(item, router.asPath)}>{item}</h3>
+              </Link>
             );
           })}
-          {/* <h3 className="border-l-2 border-black pl-2 mb-4 active">Home</h3>
-          <h3 className="border-l-2 border-black pl-2 mb-4">Projects</h3>
-          <h3 className="border-l-2 border-black pl-2 mb-4">Photography</h3>
-          <h3 className="border-l-2 border-black pl-2 mb-4">Contact</h3> */}
         </div>
       </nav>
     </>
   );
+}
+
+function activeNavLink(item: String, path: String) {
+  if ((item == "Home" && path == "/") || path == "/" + item.toLowerCase()) {
+    return "border-l-2 border-black pl-2 mb-4 cursor-pointer active";
+  } else {
+    return "border-l-2 border-black pl-2 mb-4 cursor-pointer";
+  }
 }
