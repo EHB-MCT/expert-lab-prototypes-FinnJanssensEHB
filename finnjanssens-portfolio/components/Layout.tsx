@@ -16,7 +16,7 @@ export default function Layout({ children }) {
       >
         <Sidebar />
         <Nav />
-        <div className="row-start-2 col-start-2 col-span-4 pt-8 border-l-2 border-black mb-4 pl-8">
+        <div className="row-start-2 col-start-2 col-span-4 pt-8 border-l-2 border-black mb-4 grid grid-cols-4 gap-x-5">
           {children}
         </div>
       </main>

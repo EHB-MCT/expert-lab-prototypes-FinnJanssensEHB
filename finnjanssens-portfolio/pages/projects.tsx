@@ -8,7 +8,6 @@ export default function Projects({ projects }) {
 
   return (
     <Layout>
-      <h1 className="font-bold text-5xl mb-8">My Projects</h1>
       {projects &&
         projects.data.map((project) => {
           return <Project key={project.id} project={project} />;

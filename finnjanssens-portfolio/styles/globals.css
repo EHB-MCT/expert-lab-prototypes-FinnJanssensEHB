@@ -15,14 +15,14 @@ h1 {
   font-family: garamond-premier-pro-display, serif;
   font-weight: 700;
   font-style: normal;
-  font-size: 400% !important;
+  font-size: 250% !important;
 }
 
 h2 {
   font-family: garamond-premier-pro-display, serif;
   font-weight: 600;
   font-style: normal;
-  font-size: 200% !important;
+  font-size: 180% !important;
 }
 
 h3,
@@ -30,10 +30,10 @@ nav a {
   font-family: garamond-premier-pro-display, serif;
   font-weight: 500;
   font-style: normal;
-  font-size: 170% !important;
+  font-size: 130% !important;
 }
 
-nav > div > h3:first-child {
+nav > div > h2:first-child {
   margin-bottom: 0;
 }
 
