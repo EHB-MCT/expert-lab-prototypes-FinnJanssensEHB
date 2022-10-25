@@ -25,7 +25,7 @@ export default function Nav() {
                 href={`/${item == "Home" ? "" : item.toLowerCase()}`}
                 key={index}
               >
-                <h3 className={activeNavLink(item, router.asPath)}>{item}</h3>
+                <h2 className={activeNavLink(item, router.asPath)}>{item}</h2>
               </Link>
             );
           })}

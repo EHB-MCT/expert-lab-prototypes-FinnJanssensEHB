@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "photographies",
+  "info": {
+    "singularName": "photography",
+    "pluralName": "photographies",
+    "displayName": "Photography"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    }
+  }
+}
