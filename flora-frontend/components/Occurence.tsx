@@ -5,13 +5,15 @@ export default function Occurence({ occurence }) {
   let date = new Date(Date.parse(occurence.eventDate));
 
   return (
-    <div className="rounded-md bg-black text-white p-4 mb-2 w-3/4 m-auto">
+    <div className="rounded-md bg-black text-white p-4 mb-2 w-3/6 m-auto">
       <p className="text-gray-300 font-light text-sm">
         {date.toDateString()} -{" "}
         {convertDMS(occurence.decimalLatitude, occurence.decimalLongitude)}
       </p>
       <h1 className="font-bold">{occurence.scientificName}</h1>
-      <h2 className="font-medium text-base">{occurence.recordedBy}</h2>
+      <h2 className="font-medium text-xs">
+        {occurence.recordedBy.split(";").join(", ")}
+      </h2>
     </div>
   );
 

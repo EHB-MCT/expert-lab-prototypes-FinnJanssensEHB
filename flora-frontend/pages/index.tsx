@@ -1,7 +1,7 @@
 import Layout from "../components/Layout";
 import Occurence from "../components/Occurence";
 import { fetcher } from "../services/api.service";
-import { useState, useEffect, React } from "react";
+import { useState, useEffect } from "react";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 
