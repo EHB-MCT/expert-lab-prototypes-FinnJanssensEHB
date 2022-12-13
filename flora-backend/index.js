@@ -36,7 +36,7 @@ async function findOccurences(skip, limit, q, sort_by, order_by) {
   }
 
   const sort = JSON.parse(`{ "${sort_by}": ${order_by_mdb} }`);
-  console.log(sort);
+  console.log("SORT", sort);
   const cursor = collection
     .find({})
     // .aggregate(search)
