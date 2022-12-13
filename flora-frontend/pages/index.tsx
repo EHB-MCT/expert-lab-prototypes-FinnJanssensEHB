@@ -1,85 +1,60 @@
-import Layout from "../components/Layout";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import Occurence from "../components/Occurence";
-import { fetcher } from "../services/api.service";
-import { useState, useEffect } from "react";
-import Dropdown from "react-dropdown";
-import "react-dropdown/style.css";
 
-export default function Home({ initialCache }) {
-  const [dataCache, setDataCache] = useState(initialCache);
+export default function Home() {
+  const [occurences, setOccurences] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(25);
-
-  function handlePreviousPage() {}
-  async function handleNextPage() {
-    console.log("page + pageSize", page + pageSize);
-    let newPage = page + pageSize;
-    setPage(newPage);
-    console.log("page", page);
-    if (dataCache.length < page + pageSize + 1) {
-      updateCache();
-    }
-  }
-
-  async function updateCache() {
-    const response = await fetcher(
-      `http://localhost:7000/occurences?page=${page}&pageSize=${pageSize}`
-    );
-    console.log(response.results);
-    setDataCache(dataCache.concat(response.results));
-    console.log(dataCache);
-  }
-
-  const sortOptions = ["eventDate", "recordedBy", "family"];
-
+  const [length, setLength] = useState(0);
+  useEffect(() => {
+    setIsLoading(true);
+    axios
+      .get(`http://localhost:7000/occurences?page=${page}&pageSize=25`)
+      .then((res) => {
+        setOccurences((prevState) => [...res.data.results]);
+        setIsLoading(false);
+        setLength(res.data.count);
+        console.log(res.data.results);
+        return res.data.results;
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoading(false);
+      });
+  }, [page]);
   return (
-    <Layout>
-      <div className=" flex flex-row w-1/4 mb-4 m-auto">
-        <Dropdown
-          className="m-auto mb-4"
-          options={sortOptions}
-          value={sortOptions[0]}
-          placeholder="Select an option"
-        />
-        <Dropdown
-          className="m-auto mb-4"
-          options={["desc", "asc"]}
-          value={"desc"}
-          placeholder="Select an option"
-        />
-      </div>
-      {dataCache &&
-        dataCache.slice(page, pageSize).map((occurence) => {
+    <>
+      <h1 className="w-1/2 font-bold text-6xl my-8 m-auto">Flora Occurences</h1>
+      <div className=" flex flex-row w-1/4 mb-4 m-auto"></div>
+      {occurences &&
+        occurences.map((occurence) => {
           return <Occurence key={occurence.gbifID} occurence={occurence} />;
         })}
-      <h3 className="text-sm mt-4">
-        {/* Showing {data.page}-{data.page + data.pageSize} of {data.count} */}
-      </h3>
-      <div className="flex flex-row">
-        <button
-          onClick={handlePreviousPage}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-        >
-          &lt;
-        </button>
-        <button
-          onClick={handleNextPage}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-        >
-          &gt;
-        </button>
+      <div className="w-1/2 h-28 m-auto flex flex-row justify-between items-center">
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <>
+            <button
+              disabled={page === 1}
+              onClick={() => setPage((prevState) => prevState - 1)}
+              className="px-4 py-2 font-semibold text-sm bg-cyan-500 text-white rounded-full shadow-sm disabled:bg-gray-300"
+            >
+              Prev
+            </button>
+            <p>
+              Page {page} of {length / 25}
+            </p>
+            <button
+              onClick={() => setPage((prevState) => prevState + 1)}
+              className="px-4 py-2 font-semibold text-sm bg-cyan-500 text-white rounded-full shadow-sm disabled:bg-gray-300"
+            >
+              Next
+            </button>
+          </>
+        )}
       </div>
-    </Layout>
+    </>
   );
-}
-
-export async function getServerSideProps() {
-  const response = await fetcher(
-    `http://localhost:7000/occurences?page=1&pageSize=50`
-  );
-  return {
-    props: {
-      initialCache: response.results,
-    },
-  };
 }

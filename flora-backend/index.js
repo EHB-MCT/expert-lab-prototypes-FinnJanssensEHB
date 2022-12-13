@@ -55,7 +55,7 @@ app.get("/occurences", async (req, res) => {
   const query = req.query.q || "";
   const sort_by = req.query.sort_by || "eventDate";
   const order_by = req.query.order_by || "desc";
-  await findOccurences(page, pageSize, query, sort_by, order_by)
+  await findOccurences(page * pageSize, pageSize, query, sort_by, order_by)
     .then((data) =>
       res.json({
         page: page,
