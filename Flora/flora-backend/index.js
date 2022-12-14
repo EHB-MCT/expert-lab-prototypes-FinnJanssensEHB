@@ -17,16 +17,6 @@ async function findOccurences(skip, limit, q, sort_by, order_by) {
   console.log("Connected successfully to server");
   const db = client.db(dbName);
   const collection = db.collection(process.env.MONGODB_COLLECTION);
-  // const search = [
-  //   {
-  //     $search: {
-  //       autocomplete: {
-  //         path: "family",
-  //         query: q,
-  //       },
-  //     },
-  //   },
-  // ];
 
   let order_by_mdb = -1;
   if (order_by == "desc") {
