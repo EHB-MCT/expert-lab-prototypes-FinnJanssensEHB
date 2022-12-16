@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { auth } from "../../firebase/config";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import styles from "./styles";
 
 export default function LoginScreen({ navigation }) {
@@ -12,7 +14,19 @@ export default function LoginScreen({ navigation }) {
     navigation.navigate("Registration");
   };
 
-  const onLoginPress = () => {};
+  const onLoginPress = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        navigation.navigate("Home", { user });
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+  };
 
   return (
     <View style={styles.container}>

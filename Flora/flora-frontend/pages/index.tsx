@@ -13,7 +13,7 @@ export default function Home() {
     setIsLoading(true);
     axios
       .get(
-        `http://localhost:7000/occurences?page=${page}&pageSize=25&sort_by=${sortBy}&order_by=${orderBy}`
+        `http://localhost:7000/occurences?page=${page}&pageSize=4&sort_by=${sortBy}&order_by=${orderBy}`
       )
       .then((res) => {
         setOccurences((prevState) => [...res.data.results]);
@@ -79,7 +79,7 @@ export default function Home() {
               Prev
             </button>
             <p>
-              Page {page} of {length / 25}
+              Page {page} of {length / 4}
             </p>
             <button
               onClick={() => setPage((prevState) => prevState + 1)}
