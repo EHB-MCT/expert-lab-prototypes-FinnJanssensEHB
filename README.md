@@ -4,6 +4,8 @@ _Finn Janssens_
 
 _Expert Lab 2022 - 2023_
 
+**Important:** Click on the directory link for a prototype to see its requirements and setup instructions.
+
 ## Portfolio:
 
 **_URL:_** [finnjanssens.be](https://finnjanssens.be)
