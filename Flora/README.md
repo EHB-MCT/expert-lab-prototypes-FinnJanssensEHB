@@ -53,3 +53,10 @@
 1. Start NextJS frontend in development mode
 
    `npm run dev`
+
+## Sources
+
+- [https://www.mongodb.com/docs/drivers/node/current/](https://www.mongodb.com/docs/drivers/node/current/)
+- [https://www.telerik.com/blogs/add-pagination-site-react](https://www.telerik.com/blogs/add-pagination-site-react)
+- [https://www.moesif.com/blog/technical/api-design/REST-API-Design-Filtering-Sorting-and-Pagination/](https://www.moesif.com/blog/technical/api-design/REST-API-Design-Filtering-Sorting-and-Pagination/)
+- [https://www.gbif.org/dataset/271c444f-f8d8-4986-b748-e7367755c0c1](https://www.gbif.org/dataset/271c444f-f8d8-4986-b748-e7367755c0c1)

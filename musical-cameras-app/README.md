@@ -21,3 +21,9 @@
 5. Start Expo app
 
    `expo start`
+
+## Sources
+
+- [https://www.freecodecamp.org/news/react-native-firebase-tutorial/](https://www.freecodecamp.org/news/react-native-firebase-tutorial/)
+- [https://reactnavigation.org/docs/stack-navigator/](https://reactnavigation.org/docs/stack-navigator/)
+- [https://firebase.google.com/docs/auth/web/password-auth](https://firebase.google.com/docs/auth/web/password-auth)
