@@ -16,4 +16,8 @@ _Expert Lab 2022 - 2023_
 
 ## Prototype: Torfs Web Scraping
 
-**_Directory:_**
+**_Directory:_** [/Torfs Scraping](https://github.com/EHB-MCT/expert-lab-prototypes-FinnJanssensEHB/tree/main/Torfs%20Scraping)
+
+## Prototype: Login Systeem
+
+**_Directory:_** [/musical-cameras-app](https://github.com/EHB-MCT/expert-lab-prototypes-FinnJanssensEHB/tree/main/musical-cameras-app)
